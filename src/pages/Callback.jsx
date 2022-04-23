@@ -4,73 +4,86 @@ import './Callback.css';
 const request = require('request');
 
 const Callback = (props) => {
-    const [searchParams] = useSearchParams();
-    const [tokens, setTokens] = useState({});
-    const code = searchParams.get('code');
+  const [searchParams] = useSearchParams();
+  const [tokens, setTokens] = useState({});
+  const code = searchParams.get('code');
 
-    return (
-        <div>
-            <div>
-                <h1>Callback</h1>
-                <p>code: {code}</p>
-                <p>ID Token: {tokens.id_token} </p>
-                <p>Access Token: {tokens.access_token} </p>
-                <p>Refresh Token: {tokens.refresh_token} </p>
-            </div>
+  return (<>
+    <br/><br/>
+    <div style={{display: 'flex', justifyContent: 'center'}} >
+      <h2>Callback</h2>
+    </div>
+    <div>
+      <label>Code:
+        <input id="code" type="text" value={code} readOnly />
+      </label>
+    </div>
+    <br/>
 
-            <button onClick={() => getTokens(code, setTokens)} >Get Tokens</button>
-        </div>
-    );
+    <button onClick={() => getTokens(code, setTokens)} >Get Tokens</button>
+    <br/>
+    <br/>
+
+    <div>
+      <label>ID Token:</label>
+      <textarea value={tokens.id_token} readOnly />
+      <br/>
+      <label>Access Token:</label>
+      <textarea value={tokens.access_token} readOnly />
+      <br/>
+      <label>Refresh Token:</label>
+      <textarea value={tokens.refresh_token} readOnly />
+    </div>
+  </>);
 }
 
 
 const getTokens = (code, setTokens) => {
-    // const authEndpoint = process.env.AUTH_ENDPOINT;
-    // const clientId = process.env.CLIENT_ID;
-    // const responseType = process.env.RESPONSE_TYPE;
-    // const scope = process.env.SCOPE;
-    // const redirectUri = process.env.REDIRECT_URI;
-    // const tokenEndPoint = process.env.TOKEN_ENDPOINT;
-    // const authEndpoint = "https://auth-virbela-dev.auth.us-east-2.amazoncognito.com/login";
-    // const clientId = "2qkqn0f8vgfdmfieel7ohu308i";
-    // const responseType = "code";
-    // const scope = "email+openid";
-    // const redirectUri = "http://localhost:3030/callback";
-    const tokenEndPoint = "https://auth-virbela-dev.auth.us-east-2.amazoncognito.com/oauth2/token";
+  const tokenEndPoint = process.env.REACT_APP_TOKEN_ENDPOINT;
+  const client_id = process.env.REACT_APP_CLIENT_ID;
+  const scope = process.env.REACT_APP_SCOPE || "email+openid";
+  const redirect_uri = process.env.REACT_APP_REDIRECT_URI;
+  const grant_type = process.env.REACT_APP_GRANT_TYPE || "authorization_code";
 
-    request.post(
-        tokenEndPoint,
-        { 
-            form: {
-                grant_type: "authorization_code",
-                code,
-                client_id: "2qkqn0f8vgfdmfieel7ohu308i",
-                redirect_uri: "http://localhost:3030/callback",
-                scope: "email+openid"
-            }
-        },
-        function (error, response, body) {
-            if (error) {
-                console.log(`error: ${error}`);
-            }
+  // console.log(`tokenEndPoint: ${tokenEndPoint}`);
+  // console.log(`client_id: ${client_id}`);
+  // console.log(`scope: ${scope}`);
+  // console.log(`redirect_uri: ${redirect_uri}`);
+  // console.log(`grant_type: ${grant_type}`);
 
-            // console.log(`response.statusCode: ${response.statusCode}`);
-            // console.log(`body: ${body}`);
-            // console.log(`id_token: ${body.id_token}`);
-            // console.log(`access_token: ${body.access_token}`);
-            // console.log(`refresh_token: ${body.refresh_token}`);
-            
-            const { id_token, access_token, refresh_token } = JSON.parse(body);
-            setTokens({ id_token, access_token, refresh_token });
+  request.post(
+    tokenEndPoint,
+    { 
+      form: {
+        grant_type,
+        code,
+        client_id,
+        redirect_uri,
+        scope
+      }
+    },
+    function (error, response, body) {
+      if (error) {
+        console.log(`error: ${error}`);
+      }
 
-            console.log(`body: ${body}`);
-            console.log(`id_token: ${id_token}`);
-            console.log(`access_token: ${access_token}`);
-            console.log(`refresh_token: ${refresh_token}`);
+      // console.log(`response.statusCode: ${response.statusCode}`);
+      // console.log(`body: ${body}`);
+      // console.log(`id_token: ${body.id_token}`);
+      // console.log(`access_token: ${body.access_token}`);
+      // console.log(`refresh_token: ${body.refresh_token}`);
+      
+      const { id_token, access_token, refresh_token } = JSON.parse(body);
+      setTokens({ id_token, access_token, refresh_token });
 
-            return { id_token, access_token, refresh_token };
-        }
-    );
+      console.log(`body: ${body}`);
+      console.log(`id_token: ${id_token}`);
+      console.log(`access_token: ${access_token}`);
+      console.log(`refresh_token: ${refresh_token}`);
+
+      return { id_token, access_token, refresh_token };
+    }
+  );
 }
 
 export default Callback;
