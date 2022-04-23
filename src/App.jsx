@@ -2,11 +2,11 @@ import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import './App.css';
-import Home from "./pages/Home.jsx";
-import NoPage from "./pages/NoPage.jsx";
-import Callback from "./pages/Callback.jsx";
-import Signout from "./pages/Signout.jsx";
-import Layout from "./pages/Layout.jsx";
+import Home from "./pages/Home";
+import NoPage from "./pages/NoPage";
+import Callback from "./pages/Callback";
+import Signout from "./pages/Signout";
+import Layout from "./pages/Layout";
 
 function App() {
   return (
