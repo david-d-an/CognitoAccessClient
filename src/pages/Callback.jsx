@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import './Callback.css';
 const request = require('request');
+require('dotenv').config();
 
 const Callback = (props) => {
     const [searchParams] = useSearchParams();
@@ -18,25 +19,17 @@ const Callback = (props) => {
                 <p>Refresh Token: {tokens.refresh_token} </p>
             </div>
 
-            <button onClick={() => getTokens(code, setTokens)} >Get Tokens</button>
+            <button
+                className="btn btn-primary btn-lg"
+                onClick={() => getTokens(code, setTokens)} 
+            >Get Tokens</button>
         </div>
     );
 }
 
 
 const getTokens = (code, setTokens) => {
-    // const authEndpoint = process.env.AUTH_ENDPOINT;
-    // const clientId = process.env.CLIENT_ID;
-    // const responseType = process.env.RESPONSE_TYPE;
-    // const scope = process.env.SCOPE;
-    // const redirectUri = process.env.REDIRECT_URI;
-    // const tokenEndPoint = process.env.TOKEN_ENDPOINT;
-    // const authEndpoint = "https://auth-virbela-dev.auth.us-east-2.amazoncognito.com/login";
-    // const clientId = "2qkqn0f8vgfdmfieel7ohu308i";
-    // const responseType = "code";
-    // const scope = "email+openid";
-    // const redirectUri = "http://localhost:3030/callback";
-    const tokenEndPoint = "https://auth-virbela-dev.auth.us-east-2.amazoncognito.com/oauth2/token";
+    const tokenEndPoint = process.env.REACT_APP_TOKEN_ENDPOINT;
 
     request.post(
         tokenEndPoint,
