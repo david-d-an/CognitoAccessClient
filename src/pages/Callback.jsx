@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import './Callback.css';
 const request = require('request');
+require('dotenv').config();
 
 const Callback = (props) => {
   const [searchParams] = useSearchParams();
