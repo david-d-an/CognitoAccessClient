@@ -6,10 +6,10 @@ const Home = (props) => {
   const authEndpoint = process.env.REACT_APP_AUTH_ENDPOINT;
   const clientId = process.env.REACT_APP_CLIENT_ID;
   const responseType = process.env.REACT_APP_RESPONSE_TYPE;
-  const oauth_scope = process.env.REACT_APP_SCOPE;
+  const oauthScope = process.env.REACT_APP_SCOPE;
   const redirectUri = process.env.REACT_APP_REDIRECT_URI;
 
-  const link = `${authEndpoint}?client_id=${clientId}&response_type=${responseType}&scope=${oauth_scope}&redirect_uri=${redirectUri}`;
+  const link = `${authEndpoint}?client_id=${clientId}&response_type=${responseType}&scope=${oauthScope}&redirect_uri=${redirectUri}`;
 
   return (<>
     <br/><br/>
@@ -35,7 +35,7 @@ const Home = (props) => {
       <div className="row">
         <div className={'form-group col-8'} >
           <label>OAuth Scope:</label>
-          <input id="oauth_scope" type="text" value={oauth_scope} className={'form-control'} readOnly />
+          <input id="oauth_scope" type="text" value={oauthScope} className={'form-control'} readOnly />
         </div>
       </div>
 
