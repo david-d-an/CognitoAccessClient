@@ -3,9 +3,14 @@ import './Signout.css';
 
 const Signout = (props) => {
   return (<>
-    <br/><br/>
+    <br/>
+    <br/>
     <div style={{display: 'flex', justifyContent: 'center'}} >
-      <h2>Sign Out</h2>
+      <div>
+        <h2>Sign Out</h2>
+        <br/>
+        <h4>Under Construction</h4>
+      </div>
     </div>
   </>);
 }
