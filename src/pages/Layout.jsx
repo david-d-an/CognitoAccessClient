@@ -1,26 +1,29 @@
 import React from 'react';
 import { Outlet, Link } from "react-router-dom";
+import { Navbar, Nav, NavDropdown, Container } from 'react-bootstrap';
+
 
 const Layout = () => {
-  return (
-    <>
-      <nav>
-        <ul>
-          <li>
-            <Link to="/home">Home</Link>
-          </li>
-          <li>
-            <Link to="/signout">Signout</Link>
-          </li>
-          <li>
-            <Link to="/callback">Callback</Link>
-          </li>
-        </ul>
-      </nav>
+  return (<>
+    <Navbar bg="light" expand="lg">
+      <Container>
+        <Navbar.Brand href="/">React-Bootstrap</Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="me-auto">
+            <Nav.Link href="/home">Home</Nav.Link>
+            <NavDropdown title="Dropdown" id="basic-nav-dropdown">
+              <NavDropdown.Item href="/callback">Callback</NavDropdown.Item>
+              <NavDropdown.Divider />
+              <NavDropdown.Item href="/signout">Sign Out</NavDropdown.Item>
+            </NavDropdown>
+          </Nav>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
 
-      <Outlet />
-    </>
-  )
+    <Outlet /> 
+  </>)
 };
 
 export default Layout;
