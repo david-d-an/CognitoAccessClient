@@ -14,7 +14,7 @@ const Callback = (props) => {
   const getTokens = (code) => {
     const tokenEndPoint = process.env.REACT_APP_TOKEN_ENDPOINT;
     const client_id = process.env.REACT_APP_CLIENT_ID;
-    const scope = process.env.REACT_APP_SCOPE || "email+openid";
+    const scope = process.env.REACT_APP_SCOPE || "openid+email";
     const redirect_uri = process.env.REACT_APP_REDIRECT_URI;
     const grant_type = "authorization_code";
   
@@ -106,7 +106,7 @@ const Callback = (props) => {
     &nbsp;   grant_type: &quot;authorization_code&quot;, <br/>
     &nbsp;   code: &#123; <i>Authentication Code Issued by Cognito after Successful Login</i> &#125; <br/>
     &nbsp;   client_id: &#123; <i>Cognito App Client ID</i> &#125; <br/>
-    &nbsp;   scope: &quot;email+openid&quot; <br/>
+    &nbsp;   scope: &quot;openid+email&quot; <br/>
     &nbsp;   redirect_url: &#123; <i>Redirect URL Registered to Cognito</i> &#125; <br/>
     </code></pre>
 
